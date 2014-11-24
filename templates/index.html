@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+{% block body %}
+<row>
+    <div class="col-md-5">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h3 class="panel-title">SWF links</h3></div>
+            <div class="panel-body">
+                <table>
+                    <tr>
+                        <th width="100px">Hotel</th>
+                        <th>Version</th>
+                    </tr>
+                    {% for hotel in hotels %}
+                    <tr>
+                        <td>{{ hotel.url }}</td>
+                        <td>{{ hotel.latest.name }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h3 class="panel-title">Keys</h3></div>
+            <div class="panel-body">
+                <h4 style="margin-top: 0">
+                    <a href="#" class="btn btn-primary" onclick="$('#replacement').slideToggle(500);">Replacement Keys</a>
+                </h4>
+                <div id="replacement">
+                    <div>
+                        <a href="#" onclick="$('#repl_public_mod').slideToggle(500);">Public Modulus</a>
+                        <pre id="repl_public_mod"><code>{{ swfs.get().newPublicModulus }}</code></pre>
+                    </div>
+
+                    <div>
+                        <a href="#" onclick="$('#repl_public_exp').slideToggle(500);">Public Exponent</a>
+                        <pre id="repl_public_exp"><code>{{ swfs.get().newPublicExponent }}</code></pre>
+                    </div>
+
+                    <div>
+                        <a href="#" onclick="$('#repl_private_exp').slideToggle(500);">Private Exponent</a>
+                        <pre id="repl_private_exp"><code>{{ swfs.get().newPrivateExponent }}</code></pre>
+                    </div>
+                </div>
+                <!-- This HTML is formatted poorly -->
+                <h4>Original Keys</h4>
+                {% for swf in swfs %}
+                <h4 style="margin-top: 0">
+                    <a href="#" class="btn btn-primary" onclick="$('#{{ swf.name }}').slideToggle(500);">{{ swf.name }}</a>
+                </h4>
+                <div id="{{ swf.name }}">
+                    <div>
+                        <a href="#" onclick="$('#{{ swf.name }}_public_mod').slideToggle(500);">Public Modulus</a>
+                        <pre id="{{ swf.name }}_public_mod"><code>{{ swfs.get().newPublicModulus }}</code></pre>
+                    </div>
+
+                    <div>
+                        <a href="#" onclick="$('#{{ swf.name }}_public_exp').slideToggle(500);">Public Exponent</a>
+                        <pre id="{{ swf.name }}_public_exp"><code>{{ swfs.get().newPublicExponent }}</code></pre>
+                    </div>
+
+                    <div>
+                        <a href="#" onclick="$('#{{ swf.name }}_private_exp').slideToggle(500);">Private Exponent</a>
+                        <pre id="{{ swf.name }}_private_exp"><code>{{ swfs.get().newPrivateExponent }}</code></pre>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</row>
+{% endblock %}
