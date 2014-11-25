@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>tanji.pw:</title>
+        <title>Tanji - SWF Repository</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}" />
+        <link rel="icon" type="image/ico" href="{{ url_for('static', filename='favicon.ico') }}" />
     </head>
     <body>
-        <div class="container">
+        <div class="container container-fluid">
             <div class="page-header"><h2>SWF Repository</h2></div>
             {% block body %}{% endblock %}
         </div>

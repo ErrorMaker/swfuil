@@ -1,0 +1,7 @@
+#replacement {
+    display: none;
+}
+
+div[id^="RELEASE63"] {
+    display: none;
+}

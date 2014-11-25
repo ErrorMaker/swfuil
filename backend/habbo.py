@@ -179,6 +179,11 @@ class Habbo:
 
     def store_results(self):
         DatabaseHelper.insert_value(self)
+
+        if not os.path.exists(self.clientsPath):
+            os.makedirs(self.clientsPath)
+
         shutil.copyfile(os.path.join(self.tempPath, self.swfName + '.swf'),
                         os.path.join(self.clientsPath, self.swfName + '.swf'))
+
         shutil.rmtree(self.tempPath)
