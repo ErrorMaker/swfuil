@@ -1,7 +1,7 @@
 from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
-from flask import Flask, render_template, g
+from flask import Flask, render_template, g, request
 from backend.exec import Exec
 from common.db import *
 
@@ -12,6 +12,16 @@ app.debug = True
 @app.route('/')
 def index():
     return render_template('index.html', hotels=Hotel.select(), swfs=SWF.select())
+
+
+@app.route('/api.php')
+def api():
+    if request.method == 'GET':
+        h = Hotel.select(url=request.args.get('hotel', 'com')).get.latest
+        if request.args.get('type', '') == 'swf':
+            return Hotel.select().get().latest.name
+        elif request.args.get('type', '') == 'keys':
+            return h.newPublicModulus
 
 
 @app.route('/updater/<hotel_tld>')
@@ -47,5 +57,5 @@ def hotels():
 if __name__ == '__main__':
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(5000)
-    IOLoop.instance().start()
     print('Server started and listening on port 5000')
+    IOLoop.instance().start()
