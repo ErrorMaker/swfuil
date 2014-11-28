@@ -17,7 +17,7 @@ def index():
 @app.route('/api.php')
 def api():
     if request.method == 'GET':
-        h = Hotel.select(url=request.args.get('hotel', 'com')).get.latest
+        h = Hotel.select().where(Hotel.url == request.args.get('hotel', 'com')).get.latest
         if request.args.get('type', '') == 'swf':
             return Hotel.select().get().latest.name
         elif request.args.get('type', '') == 'keys':
