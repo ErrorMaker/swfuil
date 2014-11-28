@@ -23,13 +23,18 @@ class Exec:
                         temp_dir,
                         clients_dir)
 
-        session.login()
-        session.parse_client()
-        session.download_swf()
-        session.disassemble_swf()
-        session.crack_bytecode()
-        session.get_original_key()
-        session.replace_key()
-        session.reassemble_swf()
-        session.store_results()
+        try:
+            session.login()
+            session.parse_client()
+            session.download_swf()
+            session.disassemble_swf()
+            session.crack_bytecode()
+            session.get_original_key()
+            session.replace_key()
+            session.reassemble_swf()
+            session.store_results()
+            session.complete = True
+        except:
+            pass
+
         return session.return_results()

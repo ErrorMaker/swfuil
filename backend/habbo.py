@@ -32,6 +32,7 @@ class Habbo:
     origKeytext = None
     origKey = None
     origXML = None
+    complete = False
 
     def __init__(self, email, password, hotel, private_key, tools_path, temp_path, clients_path):
         self.email = email
