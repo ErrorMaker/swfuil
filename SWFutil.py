@@ -18,10 +18,11 @@ def index():
 def api():
     if request.method == 'GET':
         h = Hotel.select().where(Hotel.url == request.args.get('hotel', 'com')).get()
-        if request.args.get('type', '') == 'swf':
-            return h.latest.name
-        elif request.args.get('type', '') == 'keys':
-            return h.latest.newPublicModulus
+        request_type = request.args.get('type', 'swf')
+        if request_type == 'swf':
+            return 'http://tanji.pw/clients/{0}.swf' % h.latest.name
+        elif request_type == 'keys':
+            return ','.join([h.latest.newPublicModulus, h.latest.newPublicExponent, h.latest.newPrivateExponent])
 
 
 @app.route('/updater/<hotel_tld>')
