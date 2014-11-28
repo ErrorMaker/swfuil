@@ -18,7 +18,7 @@ def updater(hotel_tld):
     if hotel_tld == 'all':
         for hotel in hotel_tlds:
             e = Exec.process(hotel)
-            if e['complete'] == True:
+            if e['complete'] is True:
                 results.append(e)
     else:
         results.append(Exec.process(hotel_tld))
