@@ -35,6 +35,6 @@ class Exec:
             session.store_results()
             session.complete = True
         except:
-            pass
+            session.complete = False
 
         return session.return_results()
