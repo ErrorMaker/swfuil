@@ -15,10 +15,10 @@ def index():
 def updater(hotel_tld):
     hotel_tlds = ['com', 'fi', 'nl', 'dk', 'fr', 'de', 'it', 'no', 'se', 'com.tr', 'com.br', 'es']
     results = []
-    if hotel_tld is 'all':
+    if hotel_tld == 'all':
         for hotel in hotel_tlds:
             e = Exec.process(hotel)
-            if e['complete']:
+            if e['complete'] == True:
                 results.append(e)
     else:
         results.append(Exec.process(hotel_tld))
