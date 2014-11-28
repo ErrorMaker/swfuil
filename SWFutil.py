@@ -21,7 +21,7 @@ def api():
         h = Hotel.select().where(Hotel.url == request.args.get('hotel', 'com')).get()
         request_type = request.args.get('type', 'swf')
         if request_type == 'swf':
-            return 'http://tanji.pw/clients/{0}.swf' % h.latest.name
+            return 'http://tanji.pw/clients/{0}.swf'.format(h.latest.name)
         elif request_type == 'keys':
             return ','.join([h.latest.newPublicModulus, h.latest.newPublicExponent, h.latest.newPrivateExponent])
 
