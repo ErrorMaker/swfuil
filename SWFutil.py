@@ -45,8 +45,7 @@ def hotels():
     return SWF.select()
 
 if __name__ == '__main__':
-     http_server = HTTPServer(WSGIContainer(app))
-     http_server.listen(5000)
-     IOLoop.instance().start()
-#     app.run(host='0.0.0.0')
-
+    http_server = HTTPServer(WSGIContainer(app))
+    http_server.listen(5000)
+    IOLoop.instance().start()
+    print('Server started and listening on port 5000')
