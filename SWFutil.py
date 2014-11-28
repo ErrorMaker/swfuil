@@ -17,11 +17,11 @@ def index():
 @app.route('/api.php')
 def api():
     if request.method == 'GET':
-        h = Hotel.select().where(Hotel.url == request.args.get('hotel', 'com')).get.latest
+        h = Hotel.select().where(Hotel.url == request.args.get('hotel', 'com')).get()
         if request.args.get('type', '') == 'swf':
-            return Hotel.select().get().latest.name
+            return h.latest.name
         elif request.args.get('type', '') == 'keys':
-            return h.newPublicModulus
+            return h.latest.newPublicModulus
 
 
 @app.route('/updater/<hotel_tld>')
