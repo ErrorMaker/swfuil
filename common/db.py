@@ -1,7 +1,12 @@
 __author__ = 'Scott Stamp <scott@hypermine.com>'
 from peewee import *
+import os
 
-database = MySQLDatabase('swfs', host='localhost', user='root', passwd='root')
+database_name = os.getenv('MYSQL_ENV_MYSQL_DATABASE', 'swfs')
+database_host = os.getenv('MYSQL_PORT_3306_TCP_ADDR', 'localhost')
+database_username = os.getenv('MYSQL_USER', 'root')
+database_password = os.getenv('MYSQL_ENV_MYSQL_ROOT_PASSWORD', 'root')
+database = MySQLDatabase(database_name, host=database_host, user=database_username, passwd=database_password)
 
 
 class SWF(Model):
