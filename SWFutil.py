@@ -13,7 +13,15 @@ def index():
 
 @app.route('/updater/<hotel_tld>')
 def updater(hotel_tld):
-    return render_template('updater_output.html', results=Exec.process(hotel_tld))
+    hotel_tlds = ['com', 'fi', 'nl', 'dk', 'fr', 'de', 'it', 'no', 'se', 'com.tr', 'com.br', 'es']
+    results = []
+    if hotel_tld is 'all':
+        for hotel in hotel_tlds:
+            results.append(Exec.process(hotel))
+    else:
+        results.append(Exec.process(hotel_tld))
+
+    return render_template('updater_output.html', results=results)
 
 
 @app.before_request
