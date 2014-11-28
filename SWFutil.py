@@ -14,6 +14,7 @@ def index():
     return render_template('index.html', hotels=Hotel.select(), swfs=SWF.select())
 
 
+@app.route('/api')
 @app.route('/api.php')
 def api():
     if request.method == 'GET':
