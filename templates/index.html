@@ -14,7 +14,7 @@
                     <tr>
                         <td>{{ hotel.url.upper() }}</td>
                         <td>
-                            <a href="{{ url_for('static', filename=hotel.latest.name + '.swf') }}">
+                            <a href="{{ url_for('static/clients', filename=hotel.latest.name + '.swf') }}">
                                 {{ hotel.latest.name }}
                             </a>
                         </td>

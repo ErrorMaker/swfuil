@@ -1,6 +1,3 @@
-from tornado.wsgi import WSGIContainer
-from tornado.httpserver import HTTPServer
-from tornado.ioloop import IOLoop
 from flask import Flask, render_template, g, request
 from backend.exec import Exec
 from common.db import *
@@ -57,7 +54,4 @@ def hotels():
     return SWF.select()
 
 if __name__ == '__main__':
-    http_server = HTTPServer(WSGIContainer(app))
-    http_server.listen(5000)
-    print('Server started and listening on port 5000')
-    IOLoop.instance().start()
+    app.run()
