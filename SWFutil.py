@@ -1,5 +1,4 @@
 from flask import Flask, render_template, g, request, send_file
-from tornado import wsgi, httpserver, ioloop
 from backend.exec import Exec
 from common.db import *
 from urllib import request as req
@@ -76,8 +75,4 @@ def hotels():
     return SWF.select()
 
 if __name__ == '__main__':
-    from tornado import web
-    web.Application()
-    http_server = httpserver.HTTPServer(wsgi.WSGIContainer(app))
-    http_server.listen(5000)
-    ioloop.IOLoop.instance().start()
+    app.run()
