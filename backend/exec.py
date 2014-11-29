@@ -13,7 +13,7 @@ class Exec:
         replacement_key = operating_dir + '/../common/security/replacement.pem'
         tools_dir = operating_dir + '/../tools'
         temp_dir = tempfile.mkdtemp('_habbo')
-        clients_dir = operating_dir + '/../static/clients/'
+        gordon_dir = operating_dir + '/../gordon/'
 
         session = Habbo(email,
                         password,
@@ -21,7 +21,7 @@ class Exec:
                         replacement_key,
                         tools_dir,
                         temp_dir,
-                        clients_dir)
+                        gordon_dir)
 
         try:
             session.login()

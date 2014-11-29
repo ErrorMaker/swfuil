@@ -34,7 +34,7 @@ class Habbo:
     origXML = None
     complete = False
 
-    def __init__(self, email, password, hotel, private_key, tools_path, temp_path, clients_path):
+    def __init__(self, email, password, hotel, private_key, tools_path, temp_path, gordon_path):
         self.email = email
 
         self.loginCredentials = {
@@ -52,7 +52,7 @@ class Habbo:
 
         self.toolsPath = tools_path
         self.tempPath = temp_path
-        self.clientsPath = clients_path
+        self.gordonPath = gordon_path
 
         f = open(private_key, encoding='latin-1')
         self.newKeyRSA = RSA.importKey(f.read()) or RSA.generate()
@@ -181,10 +181,12 @@ class Habbo:
     def store_results(self):
         DatabaseHelper.insert_value(self)
 
-        if not os.path.exists(self.clientsPath):
-            os.makedirs(self.clientsPath)
+        client_path = os.path.join(self.clientsPath, self.swfName)
+
+        if not os.path.exists(client_path):
+            os.makedirs(client_path)
 
         shutil.copyfile(os.path.join(self.tempPath, self.swfName + '.swf'),
-                        os.path.join(self.clientsPath, self.swfName + '.swf'))
+                        os.path.join(client_path, 'Habbo.swf'))
 
         shutil.rmtree(self.tempPath)
