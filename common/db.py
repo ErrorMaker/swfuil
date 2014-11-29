@@ -2,10 +2,10 @@ __author__ = 'Scott Stamp <scott@hypermine.com>'
 from peewee import *
 import os
 
-database_name = os.getenv('SWFUTIL_DB_ENV_MYSQL_DATABASE', 'swfs')
-database_host = os.getenv('SWFUTIL_DB_PORT_3306_TCP_ADDR', 'localhost')
-database_username = os.getenv('SWFUTIL_DB_USER', 'root')
-database_password = os.getenv('SWFUTIL_DB_ENV_MYSQL_ROOT_PASSWORD', 'root')
+database_name = os.getenv('DB_NAME', 'db')
+database_host = os.getenv('DBL_HOST', 'localhost')
+database_username = os.getenv('DB_USER', 'root')
+database_password = os.getenv('DB_PASSWORD', 'root')
 database = MySQLDatabase(database_name, host=database_host, user=database_username, passwd=database_password)
 
 
