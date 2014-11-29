@@ -2,11 +2,12 @@ __author__ = 'Scott Stamp <scott@hypermine.com>'
 from peewee import *
 import os
 
-database_name = os.getenv('DB_NAME', 'db')
-database_host = os.getenv('DBL_HOST', 'localhost')
-database_username = os.getenv('DB_USER', 'root')
-database_password = os.getenv('DB_PASSWORD', 'root')
-database = MySQLDatabase(database_name, host=database_host, user=database_username, passwd=database_password)
+name = os.getenv('DB_NAME', 'db')
+host = os.getenv('DBL_HOST', '172.17.42.1')
+username = os.getenv('DB_USER', 'root')
+password = os.getenv('DB_PASSWORD', 'Sl6QmCJ5ziGiVyMF')
+database = MySQLDatabase(name, host=host,
+                         user=username, passwd=password, port=49154)
 
 
 class SWF(Model):
