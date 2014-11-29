@@ -1,1 +1,1 @@
-web: gunicorn SWFutil:app --workers 2 --preload --log-file -
+web: gunicorn SWFutil:app --workers 2 --preload --graceful-timeout 90 --log-file -
