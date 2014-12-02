@@ -1,4 +1,4 @@
-from flask import Flask, render_template, g, request, send_file
+from flask import Flask, render_template, g, request, send_file, abort
 from backend.exec import Exec
 from common.db import *
 from urllib import request as req
@@ -41,6 +41,7 @@ def updater(hotel_tld):
 
     return render_template('updater_output.html', results=results)
 
+
 @app.route('/gordon/RELEASE<version>/<file>.swf')
 def get_resource(version, file):
     local_path = operating_dir + '/gordon/RELEASE' + version
@@ -71,8 +72,19 @@ def after_request(response):
     return response
 
 
-def hotels():
-    return SWF.select()
+def external_url_handler(error, endpoint, **values):
+    """Looks up an external URL when `url_for` cannot build a URL."""
+    # lol jk, I don't give a fuck
+    try:
+        print(endpoint, values)
+    except:
+        pass
+
+
+DatabaseHelper.setup_db()
+
+app.url_build_error_handlers.clear()
+app.url_build_error_handlers.append(external_url_handler)
 
 if __name__ == '__main__':
     app.run()

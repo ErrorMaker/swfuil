@@ -1,7 +1,6 @@
 __author__ = 'Scott Stamp <scott@hypermine.com>'
 import base64
 import glob
-import os
 from urllib import request
 import requests
 import re
@@ -98,7 +97,7 @@ class Habbo:
     def disassemble_swf(self):
         """Disassemble SWF"""
         with cd(self.tempPath):
-            self.rabc = RABCDasm(self.toolsPath, self.tempPath, self.swfName)
+            self.rabc = RABCDasm(self.toolsPath, self.tempPath, self.swfName, True)
             self.rabc.abcexport()
             self.rabc.swfbinexport()
             self.rabc.rabcdasm()
@@ -181,12 +180,14 @@ class Habbo:
     def store_results(self):
         DatabaseHelper.insert_value(self)
 
-        client_path = os.path.join(self.clientsPath, self.swfName)
+        client_path = os.path.join(self.gordonPath, self.swfName)
 
         if not os.path.exists(client_path):
             os.makedirs(client_path)
 
         shutil.copyfile(os.path.join(self.tempPath, self.swfName + '.swf'),
                         os.path.join(client_path, 'Habbo.swf'))
+
+        print(', '.join(glob.glob('gordon/**/*')))
 
         shutil.rmtree(self.tempPath)

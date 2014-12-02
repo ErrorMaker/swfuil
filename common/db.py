@@ -1,13 +1,27 @@
 __author__ = 'Scott Stamp <scott@hypermine.com>'
 from peewee import *
 import os
+from urllib.parse import urlparse
 
-name = os.getenv('DB_NAME', 'db')
-host = os.getenv('DBL_HOST', '172.17.42.1')
-username = os.getenv('DB_USER', 'root')
-password = os.getenv('DB_PASSWORD', 'Sl6QmCJ5ziGiVyMF')
+
+if 'MYSQL_URL' in os.environ:
+    # Looks like we're in Stackato
+    url = urlparse(os.environ['MYSQL_URL'])
+    name = url.path[1:]
+    host = url.hostname
+    username = url.username
+    password = url.password
+    port = url.port
+else:
+    # Defaults, we're probably not running on Stackato
+    name = os.getenv('DB_NAME', 'swfs')
+    host = os.getenv('DBL_HOST', 'localhost')
+    username = os.getenv('DB_USER', 'root')
+    password = os.getenv('DB_PASSWORD', 'root')
+    port = 3306
+
 database = MySQLDatabase(name, host=host,
-                         user=username, passwd=password, port=49154)
+                         user=username, passwd=password, port=port)
 
 
 class SWF(Model):
@@ -33,13 +47,13 @@ class Hotel(Model):
 
 class DatabaseHelper:
     @staticmethod
-    def create_tables():
-        database.connect()
-        print(database.get_tables())
+    def setup_db():
+        """Setup the tables in the database, unless they exist."""
         database.create_tables([SWF, Hotel], True)
 
     @staticmethod
     def insert_value(habbo):
+        """Insert the results from an instance of backend.habbo.Habbo."""
         with database.transaction():
             try:
                 swf = SWF.create(

@@ -15,10 +15,10 @@ class RABCDasm:
     def abcexport(self):
         with cd(self.tempDir):
             p = ([self.toolsDir + '/abcexport', self.swfName + '.swf'])
-            Popen(p).wait()
             if self.debug:
                 print(p)
                 print('--------------------')
+            Popen(p).wait()
 
     def abcreplace(self, index):
         with cd(self.tempDir):
